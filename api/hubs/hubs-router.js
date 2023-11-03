@@ -28,7 +28,6 @@ router.post('/', (req, res, next) => {
 router.delete('/:id', checkHubId, (req, res, next) => {
   Hubs.remove(req.params.id)
     .then (()=> {
-      console.log('remove was executed');
       res.status(200).json({ message: 'The hub has been nuked' });
     })
     .catch(next);

@@ -4,10 +4,11 @@ function checkHubId(req, res, next) {
     Hubs.findById(req.params.id)
         .then (hub => {
             if (!hub) {
-                next({
-                    status: 404,
-                    message: `Hub ${req.params.id} not found`
-                });
+                res.status(404).json({message: `Hub ${req.params.id} not found`});
+                // next({
+                //     status: 404,
+                //     message: `Hub ${req.params.id} not found`
+                // });
             }
             else {
                 req.hub = hub;
@@ -18,6 +19,21 @@ function checkHubId(req, res, next) {
             next(error);
         });
 }
+
+function validateBody (req, res, next) {
+    const {name} = req.body;
+
+    if (name !== undefined && typeof name === 'string' && name.length) {
+        next();
+    }
+    else {
+        res.status(422).json({
+            message: 'please provide a valid name'
+        });
+    }
+
+}
 module.exports = {
     checkHubId,
+    validateBody
 };
