@@ -20,7 +20,7 @@ function checkHubId(req, res, next) {
         });
 }
 
-function validateBody (req, res, next) {
+function checkHubName (req, res, next) {
     const {name} = req.body;
 
     if (name !== undefined && typeof name === 'string' && name.length) {
@@ -35,5 +35,5 @@ function validateBody (req, res, next) {
 }
 module.exports = {
     checkHubId,
-    validateBody
+    checkHubName
 };
